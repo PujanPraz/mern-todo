@@ -16,8 +16,8 @@ pipeline {
             steps {
                 echo 'This is building the code'
                 script {
-                    build("pujanprajapati", "mern-todo-app:frontend", "latest")
-                    build("pujanprajapati", "mern-todo-app:backend", "latest")
+                    build("pujanprajapati", "mern-todo-app-frontend", "latest")
+                    build("pujanprajapati", "mern-todo-app-backend", "latest")
                 }
             }
         }
