@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  labels:
+    app: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: pujanprajapati/mern-todo-app-backend
+          ports:
+            - containerPort: 8000
+          env:
+            - name: MONGO_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: my-config
+                  key: MONGO_URI
+            - name: GMAIL_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: my-config
+                  key: GMAIL_USERNAME
+            - name: GMAIL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: my-secret
+                  key: GMAIL_PASSWORD
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: my-config
+                  key: PORT
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: my-secret
+                  key: GMAIL_PASSWORD
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+spec:
+  selector:
+    app: backend
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
