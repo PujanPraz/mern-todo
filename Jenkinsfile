@@ -24,7 +24,7 @@ pipeline {
         stage('push') {
             steps {
                 echo 'This is pushing the code'
-                script{`
+                script{
                     push("mern-todo-app:frontend", "latest")
                     push("mern-todo-app:backend", "latest")
                 }
