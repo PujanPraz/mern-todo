@@ -4,5 +4,4 @@ metadata:
   name: my-config
 data:
   MONGO_URI: "mongodb://mongo:27017/mydb"
-  GMAIL_USERNAME: "poojanpra123@gmail.com"
   PORT: "8000"
